@@ -3,17 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import Chef from './Chef';
 
 const ChefContainer = () => {
-    const [chefData, setChefData] = useState([]);
-
-    useEffect(()=>{
-        const loadData = async() => {
-            const res = await fetch('https://b7a10-chef-recipe-hunter-server-side-aargon007-aargon007.vercel.app/chef');
-            const data = await res.json();
-            setChefData(data);
-            console.log(data);
-        }
-        return () => loadData();
-    }, [])
+    const chefData = useLoaderData();
 
     return (
         <div>

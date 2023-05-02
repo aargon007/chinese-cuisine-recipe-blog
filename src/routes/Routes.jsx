@@ -5,6 +5,8 @@ import ErrorElement from '../pages/shared/ErrorElement';
 import Home from '../pages/Home/Home';
 import Chef from '../pages/Home/Chef';
 import ChefContainer from '../pages/Home/ChefContainer';
+import Trending from '../pages/Home/Trending';
+import Details from '../pages/chef/Details';
 
 const router = createBrowserRouter([
     {
@@ -14,15 +16,17 @@ const router = createBrowserRouter([
         children : [
             {
                 path : '/',
-                element : <Home/>
+                element : <Home/>,
+                loader : () => fetch("https://b7a10-chef-recipe-hunter-server-side-aargon007-aargon007.vercel.app/chef")
             },
             {
-                path : 'chef',
-                element : <ChefContainer/>,
-                loader : () => fetch('https://b7a10-chef-recipe-hunter-server-side-aargon007-jfnt5uq47.vercel.app/chef')
+                path : '/chef/:id',
+                element : <Details/>,
+                loader : ({params}) => fetch(`https://b7a10-chef-recipe-hunter-server-side-aargon007-aargon007.vercel.app/chef/${params.id}`)
             }
         ]
-    }
+    },
+    
 ])
 
 export default router;
