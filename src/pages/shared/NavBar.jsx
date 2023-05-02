@@ -12,7 +12,7 @@ const NavBar = () => {
         
                 <h1 className="inline-flex items-center font-bold gap-3">
                     <span className='text-red-500 text-3xl'> 米隆 </span>
-                    <span>Milong <br /> <small>Chinese Cuisine</small> </span>
+                    <span className='font-kalam'>Milong <br /> <small className='font-sans'>Chinese Cuisine</small> </span>
                 </h1>
 
                 <ul className="items-center hidden space-x-8 md:flex">
@@ -28,7 +28,7 @@ const NavBar = () => {
                     </li>
                     <li>
                         <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
-                             <FaRegUser/> Login
+                            Login
                         </NavLink>
                     </li>
                 </ul>
