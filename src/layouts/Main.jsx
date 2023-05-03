@@ -4,6 +4,8 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Footer from '../pages/shared/Footer';
 import { useNavigation } from 'react-router-dom';
 import Spinner from '../pages/shared/Spinner';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Main = () => {
 
@@ -20,6 +22,18 @@ const Main = () => {
             <Outlet/>
             <Footer/>
             <ScrollRestoration/>
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 };

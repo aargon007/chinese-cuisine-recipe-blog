@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaHSquare, FaHeart, FaLevelDownAlt } from 'react-icons/fa';
 import { Rating } from '@smastrom/react-rating'
-import '@smastrom/react-rating/style.css'
 
-const Recipe = ({recipe}) => {
-    const {name, ingredients, rating, cooking_method,id} = recipe;
+const Recipe = ({recipe, handleFav, favRecipe}) => {
+
+    const {name, ingredients, rating, cooking_method, id } = recipe;
+
     return (
         <div className='p-5 border border-purple-500 rounded-lg flex flex-col  gap-5 items-center justify-between hover:bg-slate-100 transition-all'>
             <div className='space-y-3'>
@@ -16,7 +17,7 @@ const Recipe = ({recipe}) => {
                             value={rating} readOnly /> {rating} Rating
                 </div>
             </div>
-            <button className='hover:outline hover:outline-red-300 bg-gray-300 p-2 rounded-lg flex items-center'>Add to Favourite <FaHeart className='text-red-500 ms-3'/></button>
+            <button onClick={() => handleFav(id)} disabled={favRecipe.includes(id)} className=' bg-gray-300 p-2 rounded-lg flex items-center'>Add to Favourite <FaHeart className='text-red-500 ms-3'/></button>
         </div>
     );
 };

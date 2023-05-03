@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Recipe from './Recipe';
+import '@smastrom/react-rating/style.css'
+import { toast } from 'react-toastify';
 
 const Details = () => {
 
     const chefDetails = useLoaderData();
     const {experience, id, name, num_recipes, picture, rating, description, recipes} = chefDetails;
+    const [favRecipe, setFavRecipe] = useState([]);
 
-    // console.log(chefDetails);
+    const handleFav = (id) => {
+        if(!(favRecipe.includes(id))){
+            setFavRecipe([...favRecipe, id]);
+            toast.success('you added this recipe as your favorite', {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
 
     return (
         <div className='py-10 px-5 md:px-28'>
@@ -33,7 +50,7 @@ const Details = () => {
             <h1 className='text-3xl text-center font-semibold font-lobster my-10'>Popular Recipe</h1>
             <div className='grid md:grid-cols-3 gap-10'>
                 {
-                    recipes.map(recipe => <Recipe key={recipe.id} recipe={recipe} />)
+                    recipes.map(recipe => <Recipe key={recipe.id} recipe={recipe} handleFav={handleFav} favRecipe={favRecipe} />)
                 }
             </div>
         </div>
