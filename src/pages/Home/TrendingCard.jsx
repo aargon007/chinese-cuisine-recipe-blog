@@ -1,4 +1,6 @@
 import React from 'react';
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const TrendingCard = ({trending}) => {
 
@@ -10,7 +12,9 @@ const TrendingCard = ({trending}) => {
             <div className='p-3 space-y-3 '>
             <h1 className='text-2xl font-bold italic'>{recipe_name}</h1>
             <p className='leading-loose'>{description}</p>
-            <p>Rating : {rating}</p>
+            <p className='flex'><Rating style={{ maxWidth: 100,marginRight:5 }}
+                            value={rating} readOnly /> {rating}
+            </p>
             </div>
         </div>
     );
