@@ -1,9 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Login = () => {
     
+    const { signIn,googleSignIn, githubSignIn,setUser } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+        .then(result => {
+            const loggedUser = result.user;
+            setUser(loggedUser);
+            navigate(from, { replace: true })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    const handleGithubSignIn = () => {
+        githubSignIn()
+        .then(result => {
+            const loggedUser = result.user;
+            setUser(loggedUser);
+            navigate(from, { replace: true })
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            form.reset();
+            navigate(from, { replace: true })
+        })
+        .catch(error => {
+            console.log(error);
+            if(error.code === "auth/wrong-password"){
+                setLoginError("Wrong password!")
+            }
+            if(error.code === "auth/user-not-found"){
+                setLoginError("user not found!")
+            }
+        })
+    }
+
 	return (
 		<div>
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 pb-12 lg:px-8">
@@ -13,8 +68,8 @@ const Login = () => {
 					</h2>
 				</div>
 
-				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm p-10 rounded-lg shadow shadow-indigo-400">
-					<form className="space-y-6" >
+				<div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm p-10 rounded-lg shadow shadow-indigo-400">
+					<form className="space-y-6" onSubmit={handleLogin}>
 						<div>
 							<label htmlFor="email"	className="block text-lg font-medium leading-6 text-gray-900">
 								Email address <span className="text-red-500 text-xl">*</span>
@@ -55,7 +110,9 @@ const Login = () => {
 								</div>
 							</div>
 						</div>
-
+                        {
+                            loginError && <p className="text-red-700">{loginError}</p>
+                        }
 						<div>
 							<button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 								Sign in
@@ -70,10 +127,10 @@ const Login = () => {
                             <p className="border-t-2 px-10"></p>
                         </div>
                         <div className="flex gap-5 justify-between mt-5">
-                            <button className="flex gap-2 w-full bg-sky-600 text-white justify-center items-center py-2 px-3 rounded-lg">
+                            <button onClick={handleGoogleSignIn} className="flex gap-2 w-full bg-sky-600 text-white justify-center items-center py-2 px-3 rounded-lg">
                                 <FaGoogle/> Google
                             </button>
-                            <button className="flex w-full gap-2 bg-black text-white justify-center items-center py-2 px-3 rounded-lg">
+                            <button onClick={handleGithubSignIn} className="flex w-full gap-2 bg-black text-white justify-center items-center py-2 px-3 rounded-lg">
                                 <FaGithub></FaGithub> Github
                             </button>
                         </div>

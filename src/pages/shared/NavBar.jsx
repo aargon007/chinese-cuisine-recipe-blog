@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaRegUser, FaTimes } from 'react-icons/fa';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const NavBar = () => {
 
+    const {user, logOut, setUser} = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleSignOut = () => {
+        logOut()
+        .then(result => {
+            setUser(null)
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
 
     return (
         <div className="py-5 px-5 md:px-28">
@@ -26,10 +38,25 @@ const NavBar = () => {
                             Blog
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
-                            Login
-                        </NavLink>
+                    <li className='flex gap-2 justify-center items-center'>
+                        {
+                            user ? 
+                             <div className='flex justify-center items-center gap-2'>
+                                {
+                                    user.photoURL ?  
+                                    <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
+                                }
+                                {
+                                    user.displayName ? <p className=''>{user.displayName}</p> : <></>
+                                }
+                             </div>
+                            : <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
+                              Login
+                              </NavLink>
+                        }
+                        {
+                            user && <button onClick={handleSignOut} className='border-2 p-1 rounded-md border-sky-500 hover:bg-blue-500 hover:text-white transition-all'>Sign Out</button>
+                        }
                     </li>
                 </ul>
 
@@ -73,10 +100,25 @@ const NavBar = () => {
                                             Blog
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/login" className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>
+                                        <li className='flex gap-3 flex-col items-start'>
+                                            {
+                                                user ? 
+                                                <div className='flex justify-center items-center gap-2'>
+                                                    {
+                                                        user.photoURL ?  
+                                                        <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
+                                                    }
+                                                    {
+                                                        user.displayName ? <p className=''>{user.displayName}</p> : <></>
+                                                    }
+                                                </div>
+                                                : <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
                                                 Login
-                                            </Link>
+                                                </NavLink>
+                                            }
+                                            {
+                                                user && <button onClick={handleSignOut} className='border-2 p-1 rounded-md border-sky-500 hover:bg-blue-500 hover:text-white transition-all'>Sign Out</button>
+                                            }
                                         </li>
                                     </ul>
                                 </nav>
