@@ -18,9 +18,11 @@ const Chef = ({chef}) => {
                 <h1 className='text-2xl font-bold'>{name}</h1>
                 <p className='text-lg'>Years of Experience : {experience}</p>
                 <p className='text-lg'>Number of Recipes : {num_recipes}</p>
-                <p className='text-lg flex'><Rating
+                <div className='text-lg flex'>
+                    <Rating
                             style={{ maxWidth: 100,marginRight:5 }}
-                            value={rating} readOnly /> {rating}</p>
+                            value={rating} readOnly /> {rating}
+                </div>
                 <button onClick={handleNavigation} className='bg-amber-600 px-3 py-2 hover:bg-amber-800 transition-all rounded-xl border-none text-white'>View Recipes</button>
             </div>
             <div className='w-5/12'>

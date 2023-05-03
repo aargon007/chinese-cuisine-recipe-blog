@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import Chef from './Chef';
 
 const ChefContainer = () => {
     const chefData = useLoaderData();
+    const navigation = useNavigation();
 
     return (
         <div>
