@@ -7,6 +7,9 @@ import Chef from '../pages/Home/Chef';
 import ChefContainer from '../pages/Home/ChefContainer';
 import Trending from '../pages/Home/Trending';
 import Details from '../pages/chef/Details';
+import PrivateRoute from './PrivateRoute';
+import Login from '../pages/shared/user/Login';
+import Register from '../pages/shared/user/Register';
 
 const router = createBrowserRouter([
     {
@@ -21,8 +24,16 @@ const router = createBrowserRouter([
             },
             {
                 path : '/chef/:id',
-                element : <Details/>,
+                element : <PrivateRoute><Details/></PrivateRoute>,
                 loader : ({params}) => fetch(`https://b7a10-chef-recipe-hunter-server-side-aargon007-aargon007.vercel.app/chef/${params.id}`)
+            },
+            {
+                path : '/login',
+                element : <Login/>
+            },
+            {
+                path : '/register',
+                element : <Register/>
             }
         ]
     },
