@@ -41,13 +41,13 @@ const NavBar = () => {
                     <li className='flex gap-2 justify-center items-center'>
                         {
                             user ? 
-                             <div className='flex justify-center items-center gap-2'>
+                             <div className='flex justify-center items-center gap-2 bg-gray-100 py-1 px-2 rounded-lg'>
                                 {
                                     user.photoURL ?  
                                     <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
                                 }
                                 {
-                                    user.displayName ? <p className=''>{user.displayName}</p> : <></>
+                                    user.displayName ? <p className='text-blue-500'>{user.displayName}</p> : <p>user</p>
                                 }
                              </div>
                             : <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
@@ -55,7 +55,7 @@ const NavBar = () => {
                               </NavLink>
                         }
                         {
-                            user && <button onClick={handleSignOut} className='border-2 p-1 rounded-md border-sky-500 hover:bg-blue-500 hover:text-white transition-all'>Sign Out</button>
+                            user && <button onClick={handleSignOut} className='py-1 px-2 text-sm rounded-md bg-blue-500 hover:bg-blue-700 text-white transition-all'>Log out</button>
                         }
                     </li>
                 </ul>
@@ -109,7 +109,7 @@ const NavBar = () => {
                                                         <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
                                                     }
                                                     {
-                                                        user.displayName ? <p className=''>{user.displayName}</p> : <></>
+                                                        user.displayName ? <p className=''>{user.displayName}</p> : <p>user</p>
                                                     }
                                                 </div>
                                                 : <NavLink to="/login" className={({ isActive }) => (isActive ? "active flex gap-2" : "default flex gap-2")}>
@@ -117,7 +117,7 @@ const NavBar = () => {
                                                 </NavLink>
                                             }
                                             {
-                                                user && <button onClick={handleSignOut} className='border-2 p-1 rounded-md border-sky-500 hover:bg-blue-500 hover:text-white transition-all'>Sign Out</button>
+                                                user && <button onClick={handleSignOut} className='py-1 px-2 text-sm rounded-md bg-blue-500 hover:bg-blue-700 text-white transition-all'>Log out</button>
                                             }
                                         </li>
                                     </ul>
