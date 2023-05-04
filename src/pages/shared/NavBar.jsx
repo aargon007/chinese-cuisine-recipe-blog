@@ -38,6 +38,11 @@ const NavBar = () => {
                             Blog
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink  to="/about" className={({ isActive }) => (isActive ? "active" : "default")} >
+                            About Us
+                        </NavLink>
+                    </li>
                     <li className='flex gap-2 justify-center items-center'>
                         {
                             user ? 
@@ -65,11 +70,11 @@ const NavBar = () => {
                 <div className="md:hidden">
                     {/* Dropdown Open Button */}
                     <button aria-label="Open Menu" title="Open Menu" onClick={() => setIsMenuOpen(true)} >
-                        <FaBars className="w-14 text-gray-600" />
+                        <FaBars className="w-14 text-gray-800 text-xl" />
                     </button>
                     {isMenuOpen && (
                         <div className="absolute top-0 left-0 w-full z-10">
-                            <div className="p-5 bg-white border rounded shadow-sm">
+                            <div className="p-5 border rounded shadow-md bg-purple-100">
                                 {/* Logo & Button section */}
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
@@ -83,7 +88,7 @@ const NavBar = () => {
                                     {/* Dropdown menu close button */}
                                     <div>
                                         <button aria-label="Close Menu" title="Close Menu"  onClick={() => setIsMenuOpen(false)} >
-                                            <FaTimes className="w-6 text-gray-600" />
+                                            <FaTimes className="w-6 text-gray-800 text-xl" />
                                         </button>
                                     </div>
                                 </div>
@@ -101,6 +106,13 @@ const NavBar = () => {
                                             Blog
                                             </Link>
                                         </li>
+
+                                        <li>
+                                            <Link to="/about" className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>
+                                            About Us
+                                            </Link>
+                                        </li>
+
                                         <li className='flex gap-3 flex-col items-start'>
                                             {
                                                 user ? 

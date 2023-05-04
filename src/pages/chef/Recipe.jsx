@@ -22,9 +22,12 @@ const Recipe = ({recipe, handleFav, favRecipe}) => {
             <div className='p-5 border border-purple-500 rounded-lg flex flex-col  gap-5 justify-between  transition-all'>
                 
                 <div className='space-y-3'>
-                    <h1 className='text-2xl text-red-500 font-semibold text-center'>{name}</h1>
-                    <p className='leading-relaxed'><span className='font-semibold'>Ingredients : </span>{ingredients.join(",")}</p>
-                    {/* <p className='leading-relaxed'><span className='font-semibold'>Cooking Method : </span> {cooking_method}</p> */}
+                    <h1 className='text-2xl text-red-500 font-semibold text-center'>
+                        {name}
+                    </h1>
+                    <p className='leading-relaxed'><span className='font-semibold'>
+                        Ingredients : </span>{ingredients.join(",")}
+                    </p>
                     <div className='flex '>
                         <Rating style={{ maxWidth: 120,marginRight:5 }} value={rating} readOnly />
                         {rating} Rating
@@ -32,13 +35,13 @@ const Recipe = ({recipe, handleFav, favRecipe}) => {
                 </div>
 
                 <div className='flex justify-between'>
-                    <button onClick={openModal} className=' hover:bg-blue-200 bg-blue-100 p-2 text-sm rounded-lg flex items-center'>
+                    <button onClick={openModal} className=' hover:bg-purple-200 bg-purple-100 p-2 text-sm rounded-lg flex items-center'>
                         View Cooking Method
                     </button>
                     <button onClick={() => handleFav(id)}
                         disabled={favRecipe.includes(id)}
                         title='mark as to favourite'
-                        className='p-3 rounded-full bg-red-500 text-white'>
+                        className={`p-3 rounded-full ${favRecipe.includes(id) ? "bg-red-300" : "bg-red-500"} text-white`}>
                         <FaRegHeart/>
                     </button>
                 </div>

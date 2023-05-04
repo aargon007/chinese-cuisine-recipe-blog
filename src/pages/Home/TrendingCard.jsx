@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazy-load';
 
 const TrendingCard = ({trending}) => {
 
-    const {recipe_name, recipe_image, description, rating} = trending
+    const {recipe_name, recipe_image, description, rating} = trending;
 
     return (
         <div className='border  rounded-lg'>

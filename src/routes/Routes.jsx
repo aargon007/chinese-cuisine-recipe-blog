@@ -11,6 +11,8 @@ import PrivateRoute from './PrivateRoute';
 import Login from '../pages/shared/user/Login';
 import Register from '../pages/shared/user/Register';
 import Blog from '../pages/blog/Blog';
+import About from '../pages/shared/About';
+import RecoverPass from '../pages/shared/user/RecoverPass';
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
             {
                 path : '/blog',
                 element : <Blog/>
+            },
+            {
+                path : '/about',
+                element : <About/>
+            },
+            {
+                path : '/login/recovery',
+                element : <RecoverPass/>
             }
         ]
     },
