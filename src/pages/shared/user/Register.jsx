@@ -2,14 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
 
-	const { createUser,user } = useContext(AuthContext);
-
+	const { createUser,user,setUser,logOut } = useContext(AuthContext);
+ 
     const [regUser, setRegUser] = useState(null);
     const [passError, setPassError] = useState(null);
     const [emError, setEmError] = useState(null);
@@ -21,10 +19,11 @@ const Register = () => {
 		const photo = form.photo.value;
 		const email = form.email.value;
 		const password = form.password.value;
-        console.log(email, password);
+        // console.log(email, password);
 
         setEmError(null);
         setPassError(null);
+        setRegUser(null)
 
         if (password.length < 6) {
             setPassError('password must be 6 characters or longer')
@@ -37,7 +36,17 @@ const Register = () => {
             updateProfile(createdUser,{
                 displayName: name, photoURL : photo
             });
-            navigate(from, { replace: true })
+            toast.success('Registration Success! You can login now.', {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            setUser(null)
 		})
 		.catch((error) => {
 			console.log(error.message);
@@ -48,8 +57,15 @@ const Register = () => {
                 setRegUser("Seems You have Already Registerd!")
             }
 		});
+
+        logOut()
+        .then(result => {
+            setUser(null)
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
 	};
-    console.log(user);
 
 	return (
 		<div>

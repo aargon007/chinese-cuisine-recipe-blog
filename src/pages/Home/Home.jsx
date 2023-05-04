@@ -7,12 +7,10 @@ import Ebook from './Ebook';
 
 const Home = () => {
     return (
-        <div className="space-y-14">
-            <div className='px-5 md:px-28 space-y-14'>
-                <Header/>
-                <ChefContainer/>
-                <Trending/>
-            </div>
+        <div className="space-y-14 px-5 md:px-28 pb-5">
+            <Header/>
+            <ChefContainer/>
+            <Trending/>
             <Ebook/>
         </div>
     );

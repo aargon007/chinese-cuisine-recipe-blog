@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 const Details = () => {
 
     const chefDetails = useLoaderData();
-    const {experience, id, name, num_recipes, picture, rating, description, recipes} = chefDetails;
+    const {experience, id, name, num_recipes, picture, rating, description, recipes,favourite} = chefDetails;
+
     const [favRecipe, setFavRecipe] = useState([]);
 
     const handleFav = (id) => {
@@ -28,6 +29,7 @@ const Details = () => {
 
     return (
         <div className='py-10 px-5 md:px-28'>
+
             <div className='md:px-28 space-y-5 border bg-purple-100 p-5 rounded-lg'>
                 <img src={picture} alt="" className='w-[150px] h-[150px] rounded-full mx-auto object-cover'/>
                 <h1 className='text-center text-2xl font-semibold'>{name}</h1>
@@ -41,16 +43,20 @@ const Details = () => {
                         <small className='text-red-500'>Experience</small>
                     </h1>
                     <h1>
-                        {rating} <br />
-                        <small className='text-red-500'>Rating</small>
+                        {favourite} <br />
+                        <small className='text-red-500'>Favourite</small>
                     </h1>
                 </div>
                 <p className='leading-loose'>{description}</p>
             </div>
+
             <h1 className='text-3xl text-center font-semibold font-lobster my-10'>Popular Recipe</h1>
             <div className='grid md:grid-cols-3 gap-10'>
                 {
-                    recipes.map(recipe => <Recipe key={recipe.id} recipe={recipe} handleFav={handleFav} favRecipe={favRecipe} />)
+                    recipes.map(recipe => <Recipe key={recipe.id}
+                        recipe={recipe}
+                        handleFav={handleFav}
+                        favRecipe={favRecipe} />)
                 }
             </div>
         </div>

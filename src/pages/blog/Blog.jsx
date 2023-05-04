@@ -41,7 +41,7 @@ const Blog = () => {
                 </div>
             </div>
             <Pdf targetRef={ref} filename="blog.pdf" options={options} scale={0.7}>
-                {({ toPdf }) => <button onClick={toPdf} className='bg-amber-600 text-white p-2 rounded-lg my-5 mx-auto block'>Generate Pdf</button>}
+                {({ toPdf }) => <button onClick={toPdf} className='bg-amber-500 text-white p-2 rounded-lg mb-10 mx-auto block'>Generate Pdf</button>}
             </Pdf>
         </div>
     );
