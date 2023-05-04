@@ -1,6 +1,7 @@
 import React from 'react';
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
+import LazyLoad from 'react-lazy-load';
 
 const TrendingCard = ({trending}) => {
 
@@ -8,7 +9,9 @@ const TrendingCard = ({trending}) => {
 
     return (
         <div className='border  rounded-lg'>
-            <img src={recipe_image} alt="" className='w-full h-[250px] rounded-lg mb-3' />
+            <LazyLoad height={250} >
+                <img src={recipe_image} alt="" className='w-full h-[250px] rounded-lg mb-3' />
+            </LazyLoad>
             <div className='p-3 space-y-3 '>
             <h1 className='text-2xl font-bold italic'>{recipe_name}</h1>
             <p className='leading-loose'>{description}</p>

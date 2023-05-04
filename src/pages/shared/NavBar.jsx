@@ -19,7 +19,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="py-5 px-5 md:px-28">
+        <div className="py-3 px-5 md:px-28 bg-purple-100">
             <div className="relative flex items-center justify-between">
         
                 <h1 className="inline-flex items-center font-bold gap-3">
@@ -44,7 +44,8 @@ const NavBar = () => {
                              <div className='flex justify-center items-center gap-2 bg-gray-100 py-1 px-2 rounded-lg'>
                                 {
                                     user.photoURL ?  
-                                    <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
+                                    <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  
+                                    : <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png" className='w-8 h-8 rounded-full' title={user.displayName}/>
                                 }
                                 {
                                     user.displayName ? <p className='text-blue-500'>{user.displayName}</p> : <p>user</p>
@@ -106,7 +107,8 @@ const NavBar = () => {
                                                 <div className='flex justify-center items-center gap-2'>
                                                     {
                                                         user.photoURL ?  
-                                                        <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  : <FaRegUser/>
+                                                        <img src={user.photoURL} className='w-8 h-8 rounded-full' title={user.displayName}/>  
+                                                        : <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png" className='w-8 h-8 rounded-full' title={user.displayName}/>
                                                     }
                                                     {
                                                         user.displayName ? <p className=''>{user.displayName}</p> : <p>user</p>
